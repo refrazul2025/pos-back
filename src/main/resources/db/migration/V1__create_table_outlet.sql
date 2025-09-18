@@ -1,0 +1,7 @@
+CREATE TABLE outlet (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    prefix VARCHAR(50),
+    create_at TIMESTAMP WITHOUT TIME ZONE,
+    update_at TIMESTAMP WITHOUT TIME ZONE
+);
