@@ -10,23 +10,25 @@ import jakarta.persistence.Table
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "outlet")
-class OutletModel {
+@Table(name = "users")
+class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id
 
-    @Column
-    String name
+    @Column(nullable = false, unique = true)
+    String username
 
-    @Column
-    String prefix
+    @Column(nullable = false)
+    String password
 
-    @Column(name = "create_at")
-    LocalDateTime createAt
+    @Column(nullable = false)
+    String email
 
-    @Column(name = "update_at")
-    LocalDateTime updateAt
+    @Column(name = "created_at")
+    LocalDateTime createdAt
 
+    @Column(name = "updated_at")
+    LocalDateTime updatedAt
 }

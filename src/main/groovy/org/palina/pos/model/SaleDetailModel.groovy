@@ -15,19 +15,19 @@ class SaleDetailModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id
+    Long id
 
     @ManyToOne
-    @JoinColumn(name = "id_sale", nullable = false)
-    private SaleModel sale
+    @JoinColumn(name = "sale_id", nullable = false)
+    SaleModel sale
 
     @Column(name = "product_code")
-    private String productCode
+    String productCode
 
-    private Integer quantity
+    Integer quantity
 
     @Column(name = "unit_price")
-    private BigDecimal unitPrice;
+    BigDecimal unitPrice
 
-    private BigDecimal subtotal;
+    BigDecimal subtotal
 }

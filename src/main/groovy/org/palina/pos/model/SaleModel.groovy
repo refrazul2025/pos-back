@@ -19,29 +19,30 @@ class SaleModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id
+    Long id
 
     @Column(name = "sale_date")
-    private LocalDate saleDate
+    LocalDate saleDate
 
     @Column(name = "sale_type")
-    private String saleType
-
-    private BigDecimal total
-
-    @Column(name = "sale_closed")
-    private boolean saleClosed
+    String saleType
 
     @Column
-    private String customer
+    BigDecimal total
+
+    @Column(name = "sale_closed")
+    boolean saleClosed
+
+    @Column
+    String customer
 
     @ManyToOne
-    @JoinColumn(name = "id_outlet", nullable = false)
-    private OutletModel outlet
+    @JoinColumn(name = "outlet_id", nullable = false)
+    OutletModel outlet
 
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
-    private List<SaleDetailModel> saleDetails
+    List<SaleDetailModel> saleDetails
 
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
-    private List<PaymentModel> payments
+    List<PaymentModel> payments
 }
