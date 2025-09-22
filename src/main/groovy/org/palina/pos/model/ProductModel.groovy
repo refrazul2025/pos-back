@@ -7,36 +7,46 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 
+import java.time.LocalDate
+import java.time.LocalDateTime
+
 @Entity
 @Table(name = "product")
 class ProductModel {
 
     @Id
     @Column
-    private String code
+    String code
 
     @Column
-    private String description
+    String description
 
     @Column
-    private String category1
+    String category2
 
     @Column
-    private String category2
+    String category1
 
     @Column
-    private String barcode
+    String barcode
 
     @Column(name = "purchase_price")
-    private BigDecimal purchasePrice
+    BigDecimal purchasePrice
 
     @Column(name = "sale_price")
-    private BigDecimal salePrice;
+    BigDecimal salePrice;
 
     @Column(name = "current_stock")
-    private Integer currentStock
+    Integer currentStock
 
     @ManyToOne
     @JoinColumn(name = "outlet_id", nullable = false)
-    private OutletModel outlet;
+    OutletModel outlet
+
+    @Column(name = "create_at")
+    LocalDateTime createAt
+
+    @Column(name = "update_at")
+    LocalDateTime updateAt
+
 }

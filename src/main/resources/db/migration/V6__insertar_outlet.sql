@@ -1,0 +1,1 @@
+insert into outlet ( name, prefix, create_at, update_at) values ('test', 'te', CURRENT_TIMESTAMP, null);

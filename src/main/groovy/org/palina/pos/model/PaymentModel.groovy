@@ -17,18 +17,18 @@ class PaymentModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_sale", nullable = false)
-    private SaleModel sale
+    @JoinColumn(name = "sale_id", nullable = false)
+    SaleModel sale
 
     @Column(name = "amount_paid")
-    private BigDecimal amountPaid
+    BigDecimal amountPaid
 
     @Column(name = "payment_date")
-    private LocalDate paymentDate
+    LocalDate paymentDate
 
     @Column(name = "payment_type")
-    private String paymentType
+    String paymentType
 }
