@@ -21,9 +21,9 @@ class AddNewProductUseCaseImpl implements AddNewProductUseCase{
     }
 
     @Override
-    GeneralResponseDto<ProductDto> execute(String outlet, ProductDto product) {
+    GeneralResponseDto<ProductDto> execute(ProductDto product) {
         LocalDateTime fecha = LocalDateTime.now()
-        OutletDto outletDto = outletService.getByName(outlet)
+        OutletDto outletDto = outletService.getById(product.outletId)
 
         if ( null != productService.findByName(product)){
             return GeneralResponseDto.error("001", "Producto ya registrado")

@@ -24,4 +24,8 @@ class SaleService {
         SaleModel model = SaleMapper.toModel(sale)
         return SaleMapper.toDto( saleRepository.save(model))
     }
+
+    SaleDto create(SaleModel sale){
+        return SaleMapper.toDto( saleRepository.save(sale))
+    }
 }

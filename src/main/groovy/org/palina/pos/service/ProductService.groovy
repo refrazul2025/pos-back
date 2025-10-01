@@ -28,8 +28,8 @@ class ProductService {
         return ProductMapper.toDto(productRepository.save(productModel))
     }
 
-    List<ProductDto> list(OutletDto outlet){
-        Optional<OutletModel> outletModel = outletRepository.findById(outlet?.id)
+    List<ProductDto> list(Long outletId){
+        Optional<OutletModel> outletModel = outletRepository.findById(outletId)
 
         ProductModel productModel = new ProductModel()
         productModel.outlet = outletModel.get()
@@ -58,4 +58,5 @@ class ProductService {
 
         return ProductMapper.toDto(model)
     }
+
 }

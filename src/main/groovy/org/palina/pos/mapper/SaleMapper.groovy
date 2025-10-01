@@ -9,7 +9,7 @@ import org.palina.pos.model.SaleDetailModel
 import org.palina.pos.model.SaleModel
 
 class SaleMapper {
-    public static SaleDto toDto(SaleModel model) {
+    static SaleDto toDto(SaleModel model) {
         if (model == null) return null;
 
         List<SaleDetailDto> saleDetails =

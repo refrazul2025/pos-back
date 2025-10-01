@@ -1,10 +1,10 @@
 package org.palina.pos.use_case.user
 
 import org.palina.pos.dto.GeneralResponseDto
-import org.palina.pos.model.UserModel
+import org.palina.pos.dto.UserDto
 
 interface ValidateUserUseCase {
 
-    GeneralResponseDto<UserModel> execute(UserModel user)
+    GeneralResponseDto<UserDto> execute(UserDto user)
 
 }
