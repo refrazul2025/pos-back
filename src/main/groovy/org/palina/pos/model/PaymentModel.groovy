@@ -31,4 +31,7 @@ class PaymentModel {
 
     @Column(name = "payment_type")
     String paymentType
+
+    @Column(name = "user_id")
+    Long userId
 }

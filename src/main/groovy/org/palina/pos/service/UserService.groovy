@@ -2,11 +2,13 @@ package org.palina.pos.service
 
 import org.palina.pos.model.UserModel
 import org.palina.pos.repository.UserRespository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class UserService {
 
+    @Autowired
     private UserRespository userRespository
 
     UserModel create(UserModel user){

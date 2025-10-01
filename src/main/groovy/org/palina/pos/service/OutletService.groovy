@@ -19,5 +19,4 @@ class OutletService {
     OutletDto getByName(String name) {
         return OutletMapper.toDto(outletRepository.findByName(name))
     }
-
 }

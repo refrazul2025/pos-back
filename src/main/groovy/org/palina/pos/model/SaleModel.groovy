@@ -36,6 +36,9 @@ class SaleModel {
     @Column
     String customer
 
+    @Column
+    Long userId
+
     @ManyToOne
     @JoinColumn(name = "outlet_id", nullable = false)
     OutletModel outlet
