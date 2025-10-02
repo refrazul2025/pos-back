@@ -37,7 +37,7 @@ class ProductController {
         def response = addNewProductUseCase.execute(req)
         def res = null
 
-        if(!response.advertencias()){
+        if(!response.getAdvertencias()){
             res = new ResponseEntity<GeneralResponseDto>(response, HttpStatus.OK)
         }else {
             res = new ResponseEntity<GeneralResponseDto>(response, HttpStatus.BAD_REQUEST)
@@ -51,7 +51,7 @@ class ProductController {
     ResponseEntity<GeneralResponseDto> list(@PathVariable("outletId") Long outletId){
         log.info("list req {}", outletId)
         def res = new ResponseEntity<GeneralResponseDto>(listProductUseCase.execute(outletId), HttpStatus.OK)
-        log.info("... list res {}", res)
+        log.info("... list res {}", res.statusCode)
         return res
     }
 }

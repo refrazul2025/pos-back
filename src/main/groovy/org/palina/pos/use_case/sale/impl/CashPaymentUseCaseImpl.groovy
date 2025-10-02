@@ -66,6 +66,7 @@ class CashPaymentUseCaseImpl implements CashPaymentUseCase{
             }else{
                 for(PaymentModel p : model.payments ){
                     p.setPaymentDate(fecha.toLocalDate())
+                    p.amountPaid = new BigDecimal(total)
                     p.userId = userOutletDto?.userId
                 }
             }
