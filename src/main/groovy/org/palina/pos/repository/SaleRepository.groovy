@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface SaleRepository extends JpaRepository<SaleModel, Long>{
 
+    List<SaleModel> findAllBySaleTypeAndSaleClosed(String saleType, boolean saleClosed)
 }

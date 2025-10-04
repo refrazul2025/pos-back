@@ -28,4 +28,10 @@ class SaleService {
     SaleDto create(SaleModel sale){
         return SaleMapper.toDto( saleRepository.save(sale))
     }
+
+    List<SaleDto> findAllByType(String type, boolean closed){
+        return saleRepository.findAllBySaleTypeAndSaleClosed(type,closed).stream().map {
+            return SaleMapper.toDto(it)
+        }.toList()
+    }
 }

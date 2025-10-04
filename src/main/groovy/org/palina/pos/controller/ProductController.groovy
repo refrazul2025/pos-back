@@ -3,6 +3,7 @@ package org.palina.pos.controller
 import org.palina.pos.dto.GeneralResponseDto
 import org.palina.pos.dto.ProductDto
 import org.palina.pos.use_case.producto.AddNewProductUseCase
+import org.palina.pos.use_case.producto.GetProductByCodeUseCase
 import org.palina.pos.use_case.producto.ListProductUseCase
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -24,11 +25,16 @@ class ProductController {
 
     private final AddNewProductUseCase addNewProductUseCase
     private final ListProductUseCase listProductUseCase
+    private final GetProductByCodeUseCase getProductByCodeUseCase
 
-    ProductController(AddNewProductUseCase addNewProductUseCase, ListProductUseCase listProductUseCase) {
+    ProductController(AddNewProductUseCase addNewProductUseCase,
+                      ListProductUseCase listProductUseCase,
+                      GetProductByCodeUseCase getProductByCodeUseCase) {
         this.addNewProductUseCase = addNewProductUseCase
         this.listProductUseCase = listProductUseCase
+        this.getProductByCodeUseCase = getProductByCodeUseCase
     }
+
 
     @ResponseBody
     @PostMapping("save")
@@ -54,4 +60,14 @@ class ProductController {
         log.info("... list res {}", res)
         return res
     }
+
+    @ResponseBody
+    @PostMapping("listByCode")
+    ResponseEntity<GeneralResponseDto> listByCode(@RequestBody List<ProductDto> req){
+        log.info("listByCode req {}", req)
+        def res = new ResponseEntity<GeneralResponseDto>(getProductByCodeUseCase.execute(req), HttpStatus.OK)
+        log.info("... list listByCode {}", res)
+        return res
+    }
+
 }
