@@ -1,13 +1,21 @@
 package org.palina.pos.config
 
-import org.palina.pos.repository.SaleDetailRepository
 import org.palina.pos.repository.SaleRepository
 import org.palina.pos.repository.UserOutletRepository
+import org.palina.pos.service.AsistenciaService
+import org.palina.pos.service.CajaService
 import org.palina.pos.service.OutletService
 import org.palina.pos.service.ProductService
+import org.palina.pos.service.SaleBalanceService
 import org.palina.pos.service.SaleService
 import org.palina.pos.service.UserOutletService
 import org.palina.pos.service.UserService
+import org.palina.pos.use_case.accounting.CashReconciliationUseCase
+import org.palina.pos.use_case.accounting.impl.CashReconciliationUseCaseImpl
+import org.palina.pos.use_case.asistencia.RegistrarAsistenciaUseCase
+import org.palina.pos.use_case.asistencia.impl.RegistrarAsistenciaUseCaseImpl
+import org.palina.pos.use_case.caja.CalcularCajaUseCase
+import org.palina.pos.use_case.caja.impl.CalcularCajaUseCaseImpl
 import org.palina.pos.use_case.outlet.GetOutletByUserUseCase
 import org.palina.pos.use_case.outlet.impl.GetOutletByUserUseCaseImpl
 import org.palina.pos.use_case.producto.AddNewProductUseCase
@@ -107,5 +115,24 @@ class AppConfiguration {
     @Bean
     AddPaymentUseCase addPaymentUseCase(final SaleRepository saleRepository){
         return new AddPaymentUseCaseImpl(saleRepository);
+    }
+
+    @Bean
+    CashReconciliationUseCase cashReconciliationUseCase( final SaleService saleService,
+                                        final SaleBalanceService saleBalanceService){
+        return new CashReconciliationUseCaseImpl(saleService, saleBalanceService)
+    }
+
+    @Bean
+    RegistrarAsistenciaUseCase registrarAsistenciaUseCase(final UserOutletService userOutletService,
+                                        final UserService userService,
+                                        final AsistenciaService asistenciaService){
+        return new RegistrarAsistenciaUseCaseImpl(userOutletService, userService, asistenciaService)
+    }
+
+    @Bean
+    CalcularCajaUseCase calcularCajaUseCase(CajaService cajaService,
+                                            SaleService saleService){
+        return new CalcularCajaUseCaseImpl(cajaService, saleService)
     }
 }

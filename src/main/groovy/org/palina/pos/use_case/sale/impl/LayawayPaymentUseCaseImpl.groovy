@@ -41,7 +41,9 @@ class LayawayPaymentUseCaseImpl implements LayawayPaymentUseCase{
     GeneralResponseDto<SaleDto> execute(SaleDto sale) {
         OutletDto outletDto = outletService.getById(sale.outletId)
 
-        UserOutletDto userOutletDto = userOutletService.findByOutlet(outletDto.id)
+        //UserOutletDto userOutletDto = userOutletService.findByOutlet(outletDto.id)
+        UserOutletDto userOutletDto = userOutletService.findByUser(sale.userId)
+
         LocalDateTime fecha = LocalDateTime.now()
         sale.outletId = outletDto.id
 

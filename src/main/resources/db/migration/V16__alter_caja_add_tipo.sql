@@ -1,0 +1,1 @@
+ALTER caja ADD COLUMN tipo VARCHAR(40);

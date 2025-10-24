@@ -16,4 +16,8 @@ class UserOutletService {
         return UserOutletMaper.toDto(userOutletRepository.findByIdOutletId(outletId))
     }
 
+    UserOutletDto findByUser(Long userId){
+        return UserOutletMaper.toDto(userOutletRepository.findByIdUserId(userId))
+    }
+
 }

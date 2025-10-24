@@ -11,6 +11,7 @@ class SaleDto{
     boolean saleClosed
     String customer
     Long outletId
+    Long userId
     String paymentType
     List<SaleDetailDto> saleDetails
     List<PaymentDto> payments

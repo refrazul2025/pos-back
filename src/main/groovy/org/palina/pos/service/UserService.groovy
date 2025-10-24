@@ -18,4 +18,12 @@ class UserService {
     UserModel findByUserName(String userName){
         return userRespository.findByUsername(userName)
     }
+
+    UserModel findById(Long id){
+        Optional<UserModel> oUserModel = userRespository.findById(id)
+        if(!oUserModel.isPresent()){
+            return null
+        }
+        return oUserModel.get()
+    }
 }

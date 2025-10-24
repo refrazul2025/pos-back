@@ -9,6 +9,7 @@ import org.palina.pos.repository.SaleRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Service
@@ -34,4 +35,17 @@ class SaleService {
             return SaleMapper.toDto(it)
         }.toList()
     }
+
+    List<SaleModel> findUnreconciledBeforeOrOn(LocalDate date){
+        return saleRepository.findUnreconciledBeforeOrOn(date)
+    }
+
+    int markAsReconciledBeforeOrOn(LocalDate date){
+        return saleRepository.markAsReconciledBeforeOrOn(date)
+    }
+
+    List<SaleModel> findUnreconciled(){
+        return saleRepository.findAllByReconciled(false)
+    }
+
 }

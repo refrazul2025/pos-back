@@ -1,0 +1,5 @@
+CREATE TABLE caja (
+    id BIGINT PRIMARY KEY,
+    monto NUMERIC(15,2) NOT NULL,
+    fecha_hora TIMESTAMP NOT NULL
+);
