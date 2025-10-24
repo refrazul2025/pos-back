@@ -39,7 +39,7 @@ class RegistrarAsistenciaUseCaseImpl implements RegistrarAsistenciaUseCase{
             return GeneralResponseDto.error("003", "Usuario no encontrado")
         }
 
-        LocalDateTime fechaHora = LocalDateTime.now()
+        LocalDateTime fechaHora = LocalDateTime.now().minusHours(6)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss");
         String horaString = fechaHora.format(formatter);
 

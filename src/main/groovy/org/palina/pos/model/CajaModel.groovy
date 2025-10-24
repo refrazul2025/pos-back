@@ -24,7 +24,7 @@ class CajaModel {
     @Column(name = "fecha_hora")
     private LocalDateTime fechaHora
 
-    @Column(name = "tipo_caja")
+    @Column(name = "tipo")
     private String tipoCaja
 
     Long getId() {
