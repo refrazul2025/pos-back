@@ -7,6 +7,7 @@ import org.palina.pos.dto.ProductDto
 import org.palina.pos.service.OutletService
 import org.palina.pos.service.ProductService
 import org.palina.pos.use_case.producto.AddFastProductUseCase
+import org.springframework.beans.factory.annotation.Value
 
 import java.time.LocalDateTime
 
@@ -15,6 +16,9 @@ class AddFastProductUseCaseImpl implements AddFastProductUseCase{
     private final ProductService productService
     private final OutletService outletService
     private final EntityManager entityManager
+
+    @Value("\${pos.app.sequence}")
+    private String secuence
 
     AddFastProductUseCaseImpl(ProductService productService,
                              OutletService outletService,
@@ -30,15 +34,9 @@ class AddFastProductUseCaseImpl implements AddFastProductUseCase{
         OutletDto outletDto = outletService.getById(product.outletId)
 
         Long nextVal = ((Number) entityManager
-                .createNativeQuery("SELECT NEXT VALUE FOR product_seq")
-                .getSingleResult())
-                .longValue()
-
-        /*Long nextVal = ((Number) entityManager
-                .createNativeQuery("SELECT nextval('product_seq')")
+                .createNativeQuery(secuence)
                 .getSingleResult())
                 .longValue();
-        */
 
         String code = "P-${nextVal}"
 
