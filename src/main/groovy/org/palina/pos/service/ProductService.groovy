@@ -36,9 +36,17 @@ class ProductService {
 
         Example<ProductModel> example = Example.of(productModel)
 
+        //Solo si hay stock se muestra
         return productRepository.findAll(example)
+                    .stream()
+                    .filter(p-> p.currentStock > 0)
+                    .map(ProductMapper::toDto)
+                    .toList()
+
+        /*return productRepository.findAll(example)
                 .stream()
                 .map(ProductMapper::toDto).toList()
+         */
     }
 
     ProductDto update( ProductDto product ){

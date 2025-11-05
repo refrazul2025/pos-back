@@ -42,4 +42,15 @@ class UserDto {
     void setPassword(String password) {
         this.password = password
     }
+
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

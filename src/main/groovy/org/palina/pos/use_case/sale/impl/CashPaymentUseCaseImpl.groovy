@@ -41,7 +41,8 @@ class CashPaymentUseCaseImpl implements CashPaymentUseCase{
     GeneralResponseDto<SaleDto> execute(SaleDto sale) {
         OutletDto outletDto = outletService.getById(sale.outletId)
 
-        UserOutletDto userOutletDto = userOutletService.findByOutlet(outletDto.id)
+        //UserOutletDto userOutletDto = userOutletService.findByOutlet(outletDto.id)
+        UserOutletDto userOutletDto = userOutletService.findByUser(sale.userId)
         LocalDateTime fecha = LocalDateTime.now()
         sale.outletId = outletDto.id
 
@@ -66,6 +67,7 @@ class CashPaymentUseCaseImpl implements CashPaymentUseCase{
             }else{
                 for(PaymentModel p : model.payments ){
                     p.setPaymentDate(fecha.toLocalDate())
+                    p.amountPaid = new BigDecimal(total)
                     p.userId = userOutletDto?.userId
                 }
             }

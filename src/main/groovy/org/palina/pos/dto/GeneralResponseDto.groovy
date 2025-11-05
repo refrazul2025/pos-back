@@ -4,41 +4,86 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.slf4j.MDC;
 
 import java.io.Serializable;
-import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record GeneralResponseDto<T>(
-        String codigo,
-        String mensaje,
-        T resultado,
-        String folio,
-        String info,
-        boolean advertencias
-) {
-    // Constructor compacto con valores por defecto
-    public GeneralResponseDto {
-        if (mensaje == null) {
-            mensaje = "Operación Exitosa.";
-        }
-        if (folio == null) {
-            String traceId = MDC.get("traceId");
-            String spanId = MDC.get("spanId");
-            folio = (traceId != null && spanId != null) ? traceId + "-" + spanId : null;
-        }
+public class GeneralResponseDto<T> implements Serializable {
+
+    private String codigo;
+    private String mensaje;
+    private T resultado;
+    private String folio;
+    private String info;
+    private boolean advertencias;
+
+    // 🔹 Constructor vacío (requerido por Jackson)
+    public GeneralResponseDto() {
+        this(null, null, null, null, null, false);
     }
 
-    // Método de ayuda para respuestas exitosas
+    // 🔹 Constructor con todos los campos
+    public GeneralResponseDto(String codigo,
+                              String mensaje,
+                              T resultado,
+                              String folio,
+                              String info,
+                              boolean advertencias) {
+        this.codigo = codigo;
+        this.mensaje = (mensaje != null) ? mensaje : "Operación Exitosa.";
+        this.resultado = resultado;
+
+        if (folio != null) {
+            this.folio = folio;
+        } else {
+            String traceId = MDC.get("traceId");
+            String spanId = MDC.get("spanId");
+            this.folio = (traceId != null && spanId != null) ? traceId + "-" + spanId : null;
+        }
+
+        this.info = info;
+        this.advertencias = advertencias;
+    }
+
+    // 🔹 Métodos estáticos de ayuda
     public static <T> GeneralResponseDto<T> ok(T resultado) {
         return new GeneralResponseDto<>("000", "Operación Exitosa.", resultado, null, null, false);
     }
 
-    // Método de ayuda para respuestas exitosas con mensaje personalizado
     public static <T> GeneralResponseDto<T> ok(T resultado, String mensaje) {
         return new GeneralResponseDto<>("000", mensaje, resultado, null, null, false);
     }
 
-    // Método de ayuda para errores
     public static <T> GeneralResponseDto<T> error(String codigo, String mensaje) {
         return new GeneralResponseDto<>(codigo, mensaje, null, null, null, true);
+    }
+
+    // 🔹 Getters & Setters
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo; }
+
+    public String getMensaje() { return mensaje; }
+    public void setMensaje(String mensaje) { this.mensaje = mensaje; }
+
+    public T getResultado() { return resultado; }
+    public void setResultado(T resultado) { this.resultado = resultado; }
+
+    public String getFolio() { return folio; }
+    public void setFolio(String folio) { this.folio = folio; }
+
+    public String getInfo() { return info; }
+    public void setInfo(String info) { this.info = info; }
+
+    public boolean getAdvertencias() { return advertencias; }
+    public void setAdvertencias(boolean advertencias) { this.advertencias = advertencias; }
+
+    @Override
+    public String toString() {
+        return "GeneralResponseDto{" +
+                "codigo='" + codigo + '\'' +
+                ", mensaje='" + mensaje + '\'' +
+                ", resultado=" + resultado +
+                ", folio='" + folio + '\'' +
+                ", info='" + info + '\'' +
+                ", advertencias=" + advertencias +
+                '}';
     }
 }

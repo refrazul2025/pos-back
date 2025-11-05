@@ -1,0 +1,1 @@
+ALTER TABLE sale_balance ADD COLUMN reconciled BOOLEAN DEFAULT FALSE;

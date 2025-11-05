@@ -2,6 +2,7 @@ package org.palina.pos.controller
 
 import org.palina.pos.dto.GeneralResponseDto
 import org.palina.pos.dto.ProductDto
+import org.palina.pos.use_case.producto.AddFastProductUseCase
 import org.palina.pos.use_case.producto.AddNewProductUseCase
 import org.palina.pos.use_case.producto.GetProductByCodeUseCase
 import org.palina.pos.use_case.producto.ListProductUseCase
@@ -26,13 +27,16 @@ class ProductController {
     private final AddNewProductUseCase addNewProductUseCase
     private final ListProductUseCase listProductUseCase
     private final GetProductByCodeUseCase getProductByCodeUseCase
+    private final AddFastProductUseCase addFastProductUseCase
 
     ProductController(AddNewProductUseCase addNewProductUseCase,
                       ListProductUseCase listProductUseCase,
-                      GetProductByCodeUseCase getProductByCodeUseCase) {
+                      GetProductByCodeUseCase getProductByCodeUseCase,
+                      AddFastProductUseCase addFastProductUseCase) {
         this.addNewProductUseCase = addNewProductUseCase
         this.listProductUseCase = listProductUseCase
         this.getProductByCodeUseCase = getProductByCodeUseCase
+        this.addFastProductUseCase = addFastProductUseCase
     }
 
 
@@ -43,7 +47,7 @@ class ProductController {
         def response = addNewProductUseCase.execute(req)
         def res = null
 
-        if(!response.advertencias()){
+        if(!response.getAdvertencias()){
             res = new ResponseEntity<GeneralResponseDto>(response, HttpStatus.OK)
         }else {
             res = new ResponseEntity<GeneralResponseDto>(response, HttpStatus.BAD_REQUEST)
@@ -57,7 +61,7 @@ class ProductController {
     ResponseEntity<GeneralResponseDto> list(@PathVariable("outletId") Long outletId){
         log.info("list req {}", outletId)
         def res = new ResponseEntity<GeneralResponseDto>(listProductUseCase.execute(outletId), HttpStatus.OK)
-        log.info("... list res {}", res)
+        log.info("... list res {}", res.statusCode)
         return res
     }
 
@@ -67,6 +71,22 @@ class ProductController {
         log.info("listByCode req {}", req)
         def res = new ResponseEntity<GeneralResponseDto>(getProductByCodeUseCase.execute(req), HttpStatus.OK)
         log.info("... list listByCode {}", res)
+        return res
+    }
+
+    @ResponseBody
+    @PostMapping("save-fast")
+    ResponseEntity<GeneralResponseDto> saveFast(@RequestBody ProductDto req) {
+        log.info("save-fast req {}", req)
+        def response = addFastProductUseCase.execute(req)
+        def res = null
+
+        if(!response.getAdvertencias()){
+            res = new ResponseEntity<GeneralResponseDto>(response, HttpStatus.OK)
+        }else {
+            res = new ResponseEntity<GeneralResponseDto>(response, HttpStatus.BAD_REQUEST)
+        }
+        log.info("... save-fast res {}", res)
         return res
     }
 
