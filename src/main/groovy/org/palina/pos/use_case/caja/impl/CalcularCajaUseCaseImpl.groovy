@@ -36,12 +36,12 @@ class CalcularCajaUseCaseImpl implements CalcularCajaUseCase {
         List<CajaDto> resList = new ArrayList<>()
 
         CajaDto cajaChicaDto = new CajaDto(monto: cajaChica.monto,
-                                           fecha: cajaChica.fechaHora.toLocalDate(),
-                                            tipo: "CAJA CHICA")
+                fecha: cajaChica.fechaHora.toLocalDate(),
+                tipo: "CAJA CHICA")
 
         CajaDto cajaVentasDto = new CajaDto(monto: res.monto,
-                                            fecha: res.fechaHora.toLocalDate(),
-                                            tipo: "VENTAS")
+                fecha: res.fechaHora.toLocalDate(),
+                tipo: "VENTAS")
 
         resList.add(cajaChicaDto)
         resList.add(cajaVentasDto)
