@@ -1,5 +1,6 @@
 package org.palina.pos.config
 
+import jakarta.persistence.EntityManager
 import org.palina.pos.repository.SaleRepository
 import org.palina.pos.repository.UserOutletRepository
 import org.palina.pos.service.AsistenciaService
@@ -18,10 +19,12 @@ import org.palina.pos.use_case.caja.CalcularCajaUseCase
 import org.palina.pos.use_case.caja.impl.CalcularCajaUseCaseImpl
 import org.palina.pos.use_case.outlet.GetOutletByUserUseCase
 import org.palina.pos.use_case.outlet.impl.GetOutletByUserUseCaseImpl
+import org.palina.pos.use_case.producto.AddFastProductUseCase
 import org.palina.pos.use_case.producto.AddNewProductUseCase
 import org.palina.pos.use_case.producto.GetProductByCodeUseCase
 import org.palina.pos.use_case.producto.ListProductUseCase
 import org.palina.pos.use_case.producto.UpdateStockUseCase
+import org.palina.pos.use_case.producto.impl.AddFastProductUseCaseImpl
 import org.palina.pos.use_case.producto.impl.AddNewProductUseCaseImpl
 import org.palina.pos.use_case.producto.impl.GetProductByCodeUseCaseImpl
 import org.palina.pos.use_case.producto.impl.ListProductUseCaseImpl
@@ -135,4 +138,12 @@ class AppConfiguration {
                                             SaleService saleService){
         return new CalcularCajaUseCaseImpl(cajaService, saleService)
     }
+
+    @Bean
+    AddFastProductUseCase addFastProductUseCase(final ProductService productService,
+                                                final OutletService outletService,
+                                                final EntityManager entityManager){
+        return new AddFastProductUseCaseImpl(productService, outletService, entityManager)
+    }
+
 }

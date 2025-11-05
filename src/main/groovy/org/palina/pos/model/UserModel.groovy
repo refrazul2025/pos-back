@@ -1,7 +1,6 @@
 package org.palina.pos.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.ToString
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
@@ -31,6 +30,9 @@ class UserModel {
 
     @Column(nullable = false)
     String email
+
+    @Column(name = "roles")
+    String roles
 
     @Column(name = "created_at")
     LocalDateTime createdAt
